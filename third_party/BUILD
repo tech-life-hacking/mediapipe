@@ -76,12 +76,6 @@ load("@rules_foreign_cc//tools/build_defs:cmake.bzl", "cmake_external")
 # linker, so if library A depends on library B, library B must come _after_.
 # Hence core is at the bottom.
 OPENCV_MODULES = [
-    "calib3d",
-    "features2d",
-    "highgui",
-    "video",
-    "videoio",
-    "imgcodecs",
     "imgproc",
     "core",
 ]
@@ -149,25 +143,10 @@ cmake_external(
         # the build, and so depends on what is installed on the local system.
         # After building, the linkopts for the current setup can be extracted
         # from lib/pkgconfig/opencv.pc in bazel-out
-        "-ljpeg",
-        "-lpng",
         "-lz",
-        "-ltiff",
-        "-lImath",
-        "-lIlmImf",
-        "-lIex",
-        "-lHalf",
-        "-lIlmThread",
-        "-ldc1394",
-        "-lavcodec",
-        "-lavformat",
-        "-lavutil",
-        "-lswscale",
-        "-lavresample",
         "-ldl",
         "-lm",
         "-lpthread",
-        "-lrt",
     ],
     shared_libraries = select({
         "@bazel_tools//src/conditions:darwin": ["libopencv_%s.%s.dylib" % (module, OPENCV_SO_VERSION) for module in OPENCV_MODULES],
