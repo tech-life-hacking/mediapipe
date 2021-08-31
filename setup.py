@@ -211,7 +211,7 @@ class GeneratePyProtos(setuptools.Command):
         sys.stderr.write('cannot find required file: %s\n' % source)
         sys.exit(-1)
 
-      protoc_command = [self._protoc, '-I.', '--python_out=.', source]
+      protoc_command = [self._protoc, '-I.', '-I/usr/local/include', '--python_out=.', source]
       if subprocess.call(protoc_command) != 0:
         sys.exit(-1)
 
